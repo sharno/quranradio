@@ -65,16 +65,20 @@
 <body>
     <div class="player-container">
         <h1>إذاعة القرآن الكريم</h1>
-        <audio id="quranPlayer" controls autoplay muted>
+        <audio id="quranPlayer" controls>
             <source src="https://n0c.radiojar.com/8s5u5tpdtwzuv" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
 
     <script>
-        const player = document.getElementById('quranPlayer');
-        player.muted = false;
-        player.play();
+        // Play audio only after user interaction
+        document.addEventListener('click', function () {
+            const player = document.getElementById('quranPlayer');
+            player.play().catch(function (error) {
+                console.log("Play failed:", error);
+            });
+        }, { once: true });
     </script>
 </body>
 
